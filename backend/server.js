@@ -16,15 +16,23 @@ app.set('trust proxy', 1);
 // Security middleware
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
 
-// CORS — comma-separate multiple allowed origins in FRONTEND_URL if needed
-const allowedOrigins = process.env.NODE_ENV === 'production'
-  ? (process.env.FRONTEND_URL || '').split(',').map(o => o.trim()).filter(Boolean)
-  : ['http://localhost:3000'];
+// CORS — comma-separate multiple allowed origins in FRONTEND_URL if needed.
+// Trailing slashes/case are stripped before comparing so a small mismatch
+// in the env var (e.g. a trailing "/") doesn't silently block every request.
+const normalizeOrigin = (o) => o.trim().replace(/\/+$/, '').toLowerCase();
+
+const allowedOrigins = [
+  'http://localhost:3000',
+  ...(process.env.FRONTEND_URL || '').split(',').map(o => o.trim()).filter(Boolean)
+].map(normalizeOrigin);
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) callback(null, true);
-    else callback(new Error('Not allowed by CORS'));
+    if (!origin || allowedOrigins.includes(normalizeOrigin(origin))) callback(null, true);
+    else {
+      console.error('CORS blocked origin:', origin, '| allowed:', allowedOrigins);
+      callback(new Error('Not allowed by CORS'));
+    }
   },
   credentials: true
 }));
