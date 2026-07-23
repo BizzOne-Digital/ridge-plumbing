@@ -12,12 +12,12 @@ import styles from './Home.module.css';
 
 export default function Home() {
   const [settings, setSettings] = useState(null);
-  const [services, setServices] = useState([]);
+  const [services, setServices] = useState(null);
   const [testimonials, setTestimonials] = useState([]);
 
   useEffect(() => {
     api.get('/settings').then(r => setSettings(r.data.data)).catch(() => {});
-    api.get('/services').then(r => setServices(r.data.data)).catch(() => {});
+    api.get('/services').then(r => setServices(r.data.data)).catch(() => setServices([]));
     api.get('/testimonials').then(r => setTestimonials(r.data.data)).catch(() => {});
   }, []);
 

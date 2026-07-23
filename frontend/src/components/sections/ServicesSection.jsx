@@ -27,7 +27,11 @@ const FALLBACK_SERVICES = [
 ];
 
 export default function ServicesSection({ services }) {
-  const displayServices = (services && services.length > 0) ? services : FALLBACK_SERVICES;
+  // services === null means the API call hasn't resolved yet — skip rendering
+  // instead of showing the Unsplash fallback and flashing to real images.
+  if (services === null) return null;
+
+  const displayServices = services.length > 0 ? services : FALLBACK_SERVICES;
 
   return (
     <section className={styles.section}>

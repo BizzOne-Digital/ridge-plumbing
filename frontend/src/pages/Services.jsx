@@ -32,16 +32,16 @@ const FALLBACK = [
 ];
 
 export default function Services() {
-  const [services, setServices] = useState([]);
+  const [services, setServices] = useState(null);
   const [settings, setSettings] = useState(null);
 
   useEffect(() => {
-    api.get('/services').then(r => setServices(r.data.data)).catch(() => {});
+    api.get('/services').then(r => setServices(r.data.data)).catch(() => setServices([]));
     api.get('/settings').then(r => setSettings(r.data.data)).catch(() => {});
     window.scrollTo(0, 0);
   }, []);
 
-  const display = services.length > 0 ? services : FALLBACK;
+  const display = services === null ? null : (services.length > 0 ? services : FALLBACK);
 
   return (
     <>
@@ -55,7 +55,7 @@ export default function Services() {
 
       <section className={styles.servicesSection}>
         <div className="container">
-          {display.map((service, i) => {
+          {display?.map((service, i) => {
             const Icon = iconMap[service.icon] || WrenchIcon;
             const features = service.features || [];
             const imgUrl = service.image?.url || 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&fit=crop';

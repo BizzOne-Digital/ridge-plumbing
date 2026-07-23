@@ -24,10 +24,7 @@ export default function Footer() {
         <div className="container">
           <div className={styles.grid}>
             <div className={styles.brand}>
-              <div className={styles.logoText}>
-                <span className={styles.logoMain}>RIDGE</span>
-                <span className={styles.logoSub}>PLUMBING</span>
-              </div>
+              <img src="/logo.png" alt="Ridge Plumbing" className={styles.logoImg} />
               <p className={styles.brandDesc}>
                 Local plumbing company proudly serving the Fraser Valley. Licensed, insured, and dedicated to getting the job done right.
               </p>
