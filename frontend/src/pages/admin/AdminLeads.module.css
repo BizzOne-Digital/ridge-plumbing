@@ -1,0 +1,50 @@
+.page { max-width: 1100px; }
+.header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.title { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; color: var(--navy); }
+.sub { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.2rem; }
+.filters { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.filterBtn { padding: 0.4rem 0.875rem; border-radius: var(--radius-full); font-size: 0.8rem; font-weight: 600; border: 1px solid var(--gray-200); background: white; color: var(--gray-600); cursor: pointer; transition: all 0.15s; text-transform: capitalize; }
+.filterBtn:hover { border-color: var(--gray-300); color: var(--navy); }
+.filterActive { background: var(--navy); color: white; border-color: var(--navy); }
+
+.layout { display: grid; grid-template-columns: 320px 1fr; gap: 1.5rem; align-items: start; }
+
+.list { display: flex; flex-direction: column; gap: 0.5rem; max-height: 75vh; overflow-y: auto; }
+.empty { padding: 2rem; text-align: center; color: var(--text-muted); font-size: 0.875rem; background: white; border-radius: var(--radius-lg); border: 1px solid var(--gray-100); }
+
+.leadCard { background: white; border-radius: var(--radius-md); padding: 1rem 1.1rem; border: 1px solid var(--gray-100); cursor: pointer; transition: all 0.15s; }
+.leadCard:hover { border-color: var(--steel); box-shadow: 0 2px 8px rgba(58,124,165,0.1); }
+.leadCard.selected { border-color: var(--steel); background: var(--blue-tint); }
+.leadTop { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem; }
+.leadName { font-size: 0.875rem; font-weight: 700; color: var(--navy); }
+.statusPill { font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.55rem; border-radius: var(--radius-full); text-transform: capitalize; }
+.leadMeta { font-size: 0.78rem; color: var(--text-secondary); text-transform: capitalize; }
+.leadDate { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.2rem; }
+
+.detail { background: white; border-radius: var(--radius-lg); border: 1px solid var(--gray-100); padding: 1.75rem; }
+.detailHeader { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; }
+.detailName { font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; color: var(--navy); }
+.detailDate { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.25rem; }
+.deleteBtn { padding: 0.5rem; border-radius: var(--radius-md); color: var(--danger); transition: background 0.15s; }
+.deleteBtn:hover { background: #FEF2F2; }
+
+.detailGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+
+.messageBox { background: var(--gray-50); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1.5rem; }
+.messageLabel { font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.4rem; }
+.messageText { font-size: 0.875rem; color: var(--gray-700); line-height: 1.6; }
+
+.statusSection {}
+.statusLabel { font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+.statusBtns { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.statusBtn { padding: 0.4rem 0.875rem; border-radius: var(--radius-full); font-size: 0.8rem; font-weight: 600; border: 1.5px solid var(--gray-200); background: white; color: var(--gray-600); cursor: pointer; transition: all 0.15s; text-transform: capitalize; }
+.statusBtnActive { font-weight: 700; }
+
+.detailEmpty { background: white; border: 1px dashed var(--gray-200); border-radius: var(--radius-lg); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem; min-height: 300px; color: var(--text-muted); font-size: 0.875rem; }
+
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .list { max-height: none; } }
+@media (max-width: 640px) {
+  .detailGrid { grid-template-columns: 1fr; }
+  .detail { padding: 1.25rem; }
+  .detailHeader { flex-wrap: wrap; gap: 0.75rem; }
+}

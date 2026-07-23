@@ -1,0 +1,42 @@
+.pageHero { background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%); padding: 8rem 0 4rem; }
+.pageTitle { font-family: var(--font-heading); font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; color: white; margin-bottom: 0.75rem; }
+.pageSub { font-size: 1.05rem; color: rgba(255,255,255,0.7); margin-bottom: 2rem; }
+.ratingBadge { display: flex; align-items: center; gap: 0.75rem; }
+.stars { display: flex; gap: 3px; }
+.ratingNum { font-family: var(--font-heading); font-size: 1.75rem; font-weight: 800; color: white; }
+.ratingCount { font-size: 0.9rem; color: rgba(255,255,255,0.6); }
+
+.section { padding: 5rem 0; background: var(--gray-50); }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
+.card { background: white; border-radius: var(--radius-lg); padding: 2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06); display: flex; flex-direction: column; gap: 1rem; transition: transform 0.25s; }
+.card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+.cardTop { display: flex; align-items: center; justify-content: space-between; }
+.serviceTag { background: var(--blue-tint); color: var(--steel-dark); font-size: 0.72rem; font-weight: 700; padding: 0.25rem 0.65rem; border-radius: var(--radius-full); }
+.review { font-size: 0.92rem; color: var(--text-secondary); line-height: 1.75; flex: 1; font-style: italic; }
+.author { display: flex; align-items: center; gap: 0.75rem; border-top: 1px solid var(--gray-100); padding-top: 1rem; }
+.avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+.avatarInitials { width: 40px; height: 40px; border-radius: 50%; background: var(--steel); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; color: white; flex-shrink: 0; }
+.name { font-size: 0.875rem; font-weight: 700; color: var(--navy); }
+.location { font-size: 0.78rem; color: var(--text-muted); }
+
+.reviewSection { padding: 5rem 0; background: white; }
+.reviewWrap { max-width: 700px; margin: 0 auto; }
+.reviewForm { background: var(--gray-50); border: 1px solid var(--gray-100); border-radius: var(--radius-xl); padding: 2rem; }
+.formGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+.field { display: flex; flex-direction: column; gap: 0.4rem; }
+.label { font-size: 0.85rem; font-weight: 600; color: var(--navy); }
+.input, .textarea { padding: 0.7rem 0.9rem; border: 1.5px solid var(--gray-200); border-radius: var(--radius-md); font-size: 0.9rem; outline: none; transition: border-color 0.2s; font-family: inherit; }
+.input:focus, .textarea:focus { border-color: var(--steel); }
+.textarea { resize: vertical; }
+.ratingRow { display: flex; gap: 0.25rem; }
+.starBtn { background: none; border: none; cursor: pointer; padding: 2px; transition: transform 0.1s; }
+.starBtn:hover { transform: scale(1.15); }
+.reviewNote { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.75rem; }
+
+.ctaSection { padding: 5rem 0; background: var(--cream); }
+.ctaTitle { font-family: var(--font-heading); font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--navy); }
+.ctaSub { font-size: 1rem; color: var(--text-secondary); margin-top: 0.5rem; }
+
+@media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .grid { grid-template-columns: 1fr; } .formGrid { grid-template-columns: 1fr; } }

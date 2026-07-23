@@ -1,0 +1,116 @@
+.hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 8rem 0 5rem; overflow: hidden;
+}
+
+.bg { position: absolute; inset: 0; z-index: 0; }
+.bgImg { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(105deg, rgba(17,28,51,0.92) 0%, rgba(17,28,51,0.78) 50%, rgba(17,28,51,0.55) 100%);
+}
+
+.inner {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center;
+  gap: 2.5rem;
+}
+
+.content { max-width: 720px; display: flex; flex-direction: column; align-items: center; }
+.checks { align-items: center; }
+.checkItem { justify-content: center; }
+.badges { justify-content: center; }
+
+.offerPill {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  backdrop-filter: blur(8px);
+  color: white; font-size: 0.85rem; font-weight: 600;
+  padding: 0.5rem 1.1rem; border-radius: var(--radius-full);
+  margin-bottom: 1.25rem;
+  animation: fadeInUp 0.5s ease both;
+}
+.offerDot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 0 3px rgba(74,222,128,0.3);
+  animation: pulse 2s ease infinite;
+}
+@keyframes pulse { 0%,100%{ box-shadow:0 0 0 3px rgba(74,222,128,0.3);} 50%{ box-shadow:0 0 0 6px rgba(74,222,128,0.1);} }
+
+.headline {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 5.5vw, 3.75rem);
+  font-weight: 800; color: white; line-height: 1.1;
+  margin-bottom: 1.25rem;
+  animation: fadeInUp 0.5s ease 0.1s both;
+}
+.highlight { color: #7ec8e3; }
+
+.sub {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: rgba(255,255,255,0.8); line-height: 1.7;
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 0.5s ease 0.2s both;
+}
+
+.checks { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2rem; animation: fadeInUp 0.5s ease 0.25s both; }
+.checkItem { display: flex; align-items: center; gap: 0.65rem; font-size: 0.95rem; color: rgba(255,255,255,0.9); }
+.checkIcon {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--steel); display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.actions { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; margin-bottom: 2rem; animation: fadeInUp 0.5s ease 0.3s both; }
+.ctaPrimary { font-size: 1rem; padding: 1rem 2rem; }
+
+.ctaPhone {
+  display: flex; align-items: center; gap: 0.85rem; text-decoration: none; color: white;
+  transition: opacity 0.2s;
+}
+.ctaPhone:hover { opacity: 0.85; }
+.phoneCircle {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.3);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.phoneLabel { display: block; font-size: 0.75rem; color: rgba(255,255,255,0.65); }
+.phoneNum { display: block; font-size: 1rem; font-weight: 700; }
+
+.badges { display: flex; gap: 0.75rem; flex-wrap: wrap; animation: fadeInUp 0.5s ease 0.4s both; }
+.badge {
+  display: flex; align-items: center; gap: 0.5rem;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(6px);
+  padding: 0.45rem 0.9rem; border-radius: var(--radius-full);
+  font-size: 0.8rem; font-weight: 500; color: rgba(255,255,255,0.9);
+}
+
+.statsCard {
+  display: flex; gap: 0; align-self: stretch;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(12px); border-radius: var(--radius-xl);
+  overflow: hidden; animation: fadeInUp 0.5s ease 0.45s both;
+  width: 100%;
+}
+.stat { flex: 1; text-align: center; padding: 1.25rem 1rem; }
+.statNum { display: block; font-family: var(--font-heading); font-size: 1.75rem; font-weight: 800; color: white; }
+.statLabel { display: block; font-size: 0.78rem; color: rgba(255,255,255,0.65); margin-top: 0.2rem; }
+.statDivider { width: 1px; background: rgba(255,255,255,0.15); }
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 768px) {
+  .hero { padding: 7rem 0 4rem; min-height: auto; }
+  .overlay { background: linear-gradient(180deg, rgba(17,28,51,0.9) 0%, rgba(17,28,51,0.8) 100%); }
+  .actions { flex-direction: column; align-items: flex-start; }
+  .ctaPrimary { width: 100%; justify-content: center; }
+  .badges { gap: 0.5rem; }
+  .badge { font-size: 0.75rem; }
+  .statsCard { flex-direction: column; }
+  .statDivider { width: 100%; height: 1px; }
+}

@@ -1,0 +1,4 @@
+.pageHero { background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%); padding: 8rem 0 4rem; }
+.pageTitle { font-family: var(--font-heading); font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; color: white; margin-bottom: 0.75rem; }
+.pageSub { font-size: 1.05rem; color: rgba(255,255,255,0.7); }
+.section { padding: 4rem 0 5rem; background: var(--gray-50); }

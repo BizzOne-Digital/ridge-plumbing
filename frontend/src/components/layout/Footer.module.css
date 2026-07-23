@@ -1,0 +1,43 @@
+.footer { background: var(--navy-dark); color: white; }
+
+.topBar { background: var(--steel); padding: 2rem 0; }
+.ctaStrip { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+.ctaTitle { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700; }
+.ctaSub { font-size: 0.9rem; opacity: 0.85; margin-top: 0.25rem; }
+
+.main { padding: 4rem 0 3rem; }
+.grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 3rem; }
+
+.brand {}
+.logoText { display: flex; flex-direction: column; line-height: 1; margin-bottom: 1rem; }
+.logoMain { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; color: white; letter-spacing: 0.06em; }
+.logoSub { font-size: 0.7rem; font-weight: 600; color: var(--steel-light); letter-spacing: 0.14em; text-transform: uppercase; margin-top: 2px; }
+.brandDesc { font-size: 0.9rem; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 1.5rem; }
+
+.contact { display: flex; flex-direction: column; gap: 0.75rem; }
+.contactItem { display: flex; align-items: center; gap: 0.6rem; font-size: 0.9rem; color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.2s; }
+.contactItem:hover { color: white; }
+
+.col {}
+.colTitle { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--steel-light); margin-bottom: 1.25rem; }
+.linkList { display: flex; flex-direction: column; gap: 0.6rem; }
+.link { display: flex; align-items: center; gap: 0.4rem; font-size: 0.9rem; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+.link:hover { color: white; }
+
+.offerCard { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-lg); padding: 1.25rem; }
+.offerBadge { display: inline-block; background: var(--steel); color: white; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.25rem 0.7rem; border-radius: var(--radius-full); margin-bottom: 0.75rem; }
+.offerText { font-size: 0.9rem; color: rgba(255,255,255,0.8); }
+.offerPrice { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; color: white; margin: 0.25rem 0 1rem; }
+
+.bottom { border-top: 1px solid rgba(255,255,255,0.1); padding: 1.25rem 0; }
+.bottom .container { display: flex; align-items: center; justify-content: space-between; }
+.bottom p { font-size: 0.85rem; color: rgba(255,255,255,0.45); }
+.adminLink { font-size: 0.8rem; color: rgba(255,255,255,0.25); text-decoration: none; transition: color 0.2s; }
+.adminLink:hover { color: rgba(255,255,255,0.6); }
+
+@media (max-width: 1024px) { .grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+@media (max-width: 640px) {
+  .grid { grid-template-columns: 1fr; gap: 2rem; }
+  .ctaStrip { flex-direction: column; align-items: flex-start; }
+  .bottom .container { flex-direction: column; gap: 0.5rem; text-align: center; }
+}

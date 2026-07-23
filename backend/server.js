@@ -1,0 +1,94 @@
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const helmet = require('helmet');
+const morgan = require('morgan');
+const rateLimit = require('express-rate-limit');
+const path = require('path');
+require('dotenv').config();
+
+const app = express();
+
+// Required on Vercel/serverless so express-rate-limit reads the real client IP
+// from X-Forwarded-For instead of throwing on the proxy hop.
+app.set('trust proxy', 1);
+
+// Security middleware
+app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
+
+// CORS — comma-separate multiple allowed origins in FRONTEND_URL if needed
+const allowedOrigins = process.env.NODE_ENV === 'production'
+  ? (process.env.FRONTEND_URL || '').split(',').map(o => o.trim()).filter(Boolean)
+  : ['http://localhost:3000'];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) callback(null, true);
+    else callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true
+}));
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: process.env.NODE_ENV === 'production' ? 100 : 1000,
+  message: { success: false, message: 'Too many requests, please try again later.' }
+});
+app.use('/api/', limiter);
+
+// Body parser
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// Logger
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
+
+// Static uploads folder
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Routes
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/leads', require('./routes/leads'));
+app.use('/api/services', require('./routes/services'));
+app.use('/api/testimonials', require('./routes/testimonials'));
+app.use('/api/settings', require('./routes/settings'));
+app.use('/api/gallery', require('./routes/gallery'));
+
+// Health check
+app.get('/api/health', (req, res) => {
+  res.json({ success: true, message: 'Ridge Plumbing API is running', env: process.env.NODE_ENV });
+});
+
+// 404
+app.use((req, res) => {
+  res.status(404).json({ success: false, message: 'Route not found' });
+});
+
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(err.statusCode || 500).json({
+    success: false,
+    message: err.message || 'Internal Server Error'
+  });
+});
+
+// Connect to MongoDB. Mongoose buffers queries until the connection is
+// established, so it's safe to not await this before the app starts
+// handling requests — required for serverless (Vercel) cold starts, where
+// there is no long-lived process to block on a promise beforehand.
+mongoose.connection.on('connected', () => console.log('MongoDB connected'));
+mongoose.connection.on('error', (err) => console.error('MongoDB connection error:', err));
+mongoose.connect(process.env.MONGO_URI).catch(err => console.error('MongoDB connection error:', err));
+
+// Only bind a port for local/traditional hosting. On Vercel the exported
+// app is invoked directly as a serverless function handler.
+if (require.main === module) {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
+
+module.exports = app;
