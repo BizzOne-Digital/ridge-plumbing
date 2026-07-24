@@ -57,7 +57,7 @@ export default function ContactForm({ settings }) {
             <div className={styles.contactIcon}><MailIcon size={20} color="var(--steel)" /></div>
             <div>
               <div className={styles.contactLabel}>Email</div>
-              <div className={styles.contactValue}>{email}</div>
+              <div className={styles.contactValue}>Email Us</div>
             </div>
           </a>
           <div className={styles.contactRow}>

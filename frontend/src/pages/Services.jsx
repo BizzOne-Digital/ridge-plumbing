@@ -12,21 +12,21 @@ const FALLBACK = [
     _id: '1', title: 'Service Plumbing', icon: 'wrench', slug: 'service-plumbing',
     shortDescription: 'Fast, reliable repairs for leaks, fixtures, drains, and more.',
     description: 'From dripping faucets to full pipe repairs, our licensed plumbers diagnose and fix plumbing issues efficiently. We serve residential and light commercial properties across the Fraser Valley.',
-    image: { url: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=800&q=80&fit=crop' },
+    image: { url: '/hero.png' },
     features: ['Leak detection & repair', 'Faucet & fixture repair', 'Drain cleaning', 'Pipe replacement', 'Toilet repairs']
   },
   {
     _id: '2', title: 'Plumbing Installs', icon: 'tool', slug: 'plumbing-installs',
     shortDescription: 'Professional installation for renovations and new builds.',
     description: 'Whether you are renovating or building new, we handle all plumbing installations including sinks, toilets, showers, dishwashers, and complete rough-in work done to code.',
-    image: { url: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80&fit=crop' },
+    image: { url: '/about.png' },
     features: ['Sink & faucet install', 'Toilet installation', 'Shower & tub fitting', 'Dishwasher hookup', 'Bathroom rough-in']
   },
   {
     _id: '3', title: 'Hot Water Tank Replacement', icon: 'droplet', slug: 'hot-water-tank',
     shortDescription: 'Same-day hot water tank replacement from $1,799.',
     description: 'We supply and install leading hot water tank brands with same-day service available. Our team removes your old unit and has your new one running fast. Ask about our current special pricing.',
-    image: { url: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=800&q=80&fit=crop' },
+    image: { url: '/mobile-hero.png' },
     features: ['Supply & install included', 'Same-day availability', 'Old tank disposal', 'All major brands', 'Warranty provided']
   }
 ];
@@ -58,7 +58,7 @@ export default function Services() {
           {display?.map((service, i) => {
             const Icon = iconMap[service.icon] || WrenchIcon;
             const features = service.features || [];
-            const imgUrl = service.image?.url || 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&fit=crop';
+            const imgUrl = service.image?.url || '/hero.png';
             const isReverse = i % 2 !== 0;
             return (
               <div key={service._id} className={`${styles.serviceRow} ${isReverse ? styles.reverse : ''}`}>

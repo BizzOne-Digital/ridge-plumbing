@@ -15,7 +15,8 @@
 .logo {
   display: flex; align-items: center; gap: 0.75rem; text-decoration: none;
 }
-.logoImg { height: 58px; width: auto; }
+.logoImg { height: 66px; width: auto; }
+.navbar.scrolled .logoImg { height: 50px; }
 .logoText {
   display: flex; flex-direction: column; line-height: 1;
 }

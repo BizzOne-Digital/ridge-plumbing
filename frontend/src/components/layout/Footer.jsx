@@ -35,7 +35,7 @@ export default function Footer() {
                 </a>
                 <a href="mailto:kylecrawford007@gmail.com" className={styles.contactItem}>
                   <MailIcon size={16} color="var(--steel)" />
-                  <span>kylecrawford007@gmail.com</span>
+                  <span>Email Us</span>
                 </a>
                 <div className={styles.contactItem}>
                   <MapPinIcon size={16} color="var(--steel)" />

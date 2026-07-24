@@ -12,17 +12,17 @@ const FALLBACK_SERVICES = [
   {
     _id: '1', title: 'Service Plumbing', icon: 'wrench', slug: 'service-plumbing',
     shortDescription: 'Fast, reliable repairs for leaks, fixtures, drains, and more.',
-    image: { url: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&q=80&fit=crop' }
+    image: { url: '/hero.png' }
   },
   {
     _id: '2', title: 'Plumbing Installs', icon: 'tool', slug: 'plumbing-installs',
     shortDescription: 'Professional installation of fixtures, appliances, and full systems.',
-    image: { url: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&q=80&fit=crop' }
+    image: { url: '/about.png' }
   },
   {
     _id: '3', title: 'Hot Water Tank Replacement', icon: 'droplet', slug: 'hot-water-tank',
     shortDescription: 'Same-day hot water tank replacement starting from $1,799.',
-    image: { url: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=600&q=80&fit=crop' }
+    image: { url: '/mobile-hero.png' }
   }
 ];
 
@@ -50,7 +50,7 @@ export default function ServicesSection({ services }) {
         <div className={styles.grid}>
           {displayServices.map((service, i) => {
             const Icon = iconMap[service.icon] || WrenchIcon;
-            const imgUrl = service.image?.url || `https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&fit=crop`;
+            const imgUrl = service.image?.url || '/hero.png';
             return (
               <div key={service._id || i} className={styles.card}>
                 <div className={styles.cardImg}>
