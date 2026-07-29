@@ -3,7 +3,7 @@ const { sendLeadNotification } = require('../utils/mailer');
 
 exports.createLead = async (req, res) => {
   try {
-    const lead = await Lead.create(req.body);
+    const lead = await Lead.create({ ...req.body, service: req.body.service || 'other' });
     res.status(201).json({ success: true, message: 'Your request has been received. We will contact you shortly!', data: lead });
     sendLeadNotification(lead);
   } catch (err) {
