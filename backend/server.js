@@ -88,9 +88,19 @@ app.use((err, req, res, next) => {
 // established, so it's safe to not await this before the app starts
 // handling requests — required for serverless (Vercel) cold starts, where
 // there is no long-lived process to block on a promise beforehand.
+//
+// `global._mongoConn` caches the connection promise across warm serverless
+// invocations. Without this, every cold start opened a brand new connection
+// pool that was never closed, which silently piled up connections on the
+// shared Atlas cluster until it hit the cluster's connection limit —
+// causing intermittent 500s across all routes.
 mongoose.connection.on('connected', () => console.log('MongoDB connected'));
 mongoose.connection.on('error', (err) => console.error('MongoDB connection error:', err));
-mongoose.connect(process.env.MONGO_URI).catch(err => console.error('MongoDB connection error:', err));
+
+if (!global._mongoConn) {
+  global._mongoConn = mongoose.connect(process.env.MONGO_URI, { maxPoolSize: 10 });
+}
+global._mongoConn.catch(err => console.error('MongoDB connection error:', err));
 
 // Only bind a port for local/traditional hosting. On Vercel the exported
 // app is invoked directly as a serverless function handler.
