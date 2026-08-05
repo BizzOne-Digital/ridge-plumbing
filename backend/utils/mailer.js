@@ -1,9 +1,17 @@
 const nodemailer = require('nodemailer');
+const dns = require('dns');
+
+// Vercel's network can time out reaching Gmail's SMTP server over IPv6
+// ("Greeting never received" / ETIMEDOUT on CONN) even when credentials
+// are correct. Forcing IPv4 resolution avoids that dead-end route.
+dns.setDefaultResultOrder('ipv4first');
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 587,
   secure: false,
+  family: 4,
+  connectionTimeout: 15000,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
