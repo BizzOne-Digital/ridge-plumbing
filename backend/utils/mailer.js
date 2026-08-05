@@ -40,7 +40,7 @@ exports.sendLeadNotification = async (lead) => {
         <p><strong>Source:</strong> ${lead.source}</p>
       `
     });
-    console.log(`Lead notification email sent to ${to} for lead ${lead._id}`);
+    console.log(`✅ EMAIL SENT SUCCESSFULLY to ${to} for lead ${lead._id} (${lead.name})`);
   } catch (err) {
     console.error(`Failed to send lead notification email for lead ${lead._id}:`, err);
   }
