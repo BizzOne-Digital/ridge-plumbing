@@ -1,41 +1,22 @@
-const nodemailer = require('nodemailer');
-const dns = require('dns');
+const { Resend } = require('resend');
 
-// Vercel's network can time out reaching Gmail's SMTP server over IPv6
-// ("Greeting never received" / ETIMEDOUT on CONN) even when credentials
-// are correct. Forcing IPv4 resolution avoids that dead-end route.
-dns.setDefaultResultOrder('ipv4first');
-
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 587,
-  secure: false,
-  family: 4,
-  connectionTimeout: 15000,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
-});
-
-if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
-  transporter.verify((err) => {
-    if (err) console.error('Email transporter verification failed:', err);
-    else console.log('Email transporter ready — lead notifications enabled');
-  });
-}
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 exports.sendLeadNotification = async (lead) => {
-  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-    console.warn('EMAIL_USER/EMAIL_PASS not set — skipping lead notification email');
+  if (!resend) {
+    console.warn('RESEND_API_KEY not set — skipping lead notification email');
     return;
   }
 
-  const to = process.env.NOTIFY_EMAIL || process.env.EMAIL_USER;
+  const to = process.env.NOTIFY_EMAIL;
+  if (!to) {
+    console.warn('NOTIFY_EMAIL not set — skipping lead notification email');
+    return;
+  }
 
   try {
-    await transporter.sendMail({
-      from: `"Ridge Plumbing Website" <${process.env.EMAIL_USER}>`,
+    const { data, error } = await resend.emails.send({
+      from: process.env.RESEND_FROM || 'onboarding@resend.dev',
       to,
       subject: `New Lead: ${lead.name} (${lead.service})`,
       html: `
@@ -48,7 +29,13 @@ exports.sendLeadNotification = async (lead) => {
         <p><strong>Source:</strong> ${lead.source}</p>
       `
     });
-    console.log(`✅ EMAIL SENT SUCCESSFULLY to ${to} for lead ${lead._id} (${lead.name})`);
+
+    if (error) {
+      console.error(`Failed to send lead notification email for lead ${lead._id}:`, error);
+      return;
+    }
+
+    console.log(`✅ EMAIL SENT SUCCESSFULLY to ${to} for lead ${lead._id} (${lead.name}) — id ${data.id}`);
   } catch (err) {
     console.error(`Failed to send lead notification email for lead ${lead._id}:`, err);
   }
